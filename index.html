@@ -32,7 +32,9 @@
 		version    : '{api-version}'
 	  });
 		
-	  FB.AppEvents.logPageView();   
+	  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+}); 
 		
 	};
   
@@ -44,10 +46,17 @@
 	   fjs.parentNode.insertBefore(js, fjs);
 	 }(document, 'script', 'facebook-jssdk'));
 
+	 function statusChangeCallback(response){
+		 if(response.status === 'connected'){
+			 console.log('logged in and authenticate')
+		 }
+		 else{
+			 console.log('Not authenticate')
+		 }
+	 }
 
-	 FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});
+
+	
 
 {
     status: 'connected',
@@ -58,20 +67,20 @@
         userID;'...'
     }
 }
-
 <fb:login-button 
 scope="public_profile,email"
 onlogin="checkLoginState();">
 </fb:login-button>
 
 
+
 function checkLoginState() {
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+	FB.getLoginStatus(function(response) {
+		statusChangeCallback(response);
+	});
 }
-  </script>
-  
+</script>
+
 
 
 
