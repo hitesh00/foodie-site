@@ -6,9 +6,12 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v13.0&appId=510878197147954&autoLogAppEvents=1" nonce="m5txO4mH"></script>
+	<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
 	<div class="container">
 		<h1 class="label">User Login</h1>
-		<form class="login_form" action="home.html"  name="form" onsubmit="return validated()">
+		<form class="login_form" action="home.html"  name="form" onsubmit="validated()">
 			<div class="font">Email or Phone</div>
 			<input autocomplete="off" type="text" name="email">
 			<div id="email_error">Please fill up your Email or Phone</div>
@@ -19,17 +22,59 @@
 		</form>
 	</div>	
 	<script src="valid.js"></script>
-	<script>
-		window.fbAsyncInit = function() {
-		  FB.init({
-			appId            : '510878197147954',
-			autoLogAppEvents : true,
-			xfbml            : true,
-			version          : 'v13.0'
-		  });
-		};
-	  </script>
-	  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-		  
+	
+<script>
+	window.fbAsyncInit = function() {
+	  FB.init({
+		appId      : '510878197147954',
+		cookie     : true,
+		xfbml      : true,
+		version    : '{api-version}'
+	  });
+		
+	  FB.AppEvents.logPageView();   
+		
+	};
+  
+	(function(d, s, id){
+	   var js, fjs = d.getElementsByTagName(s)[0];
+	   if (d.getElementById(id)) {return;}
+	   js = d.createElement(s); js.id = id;
+	   js.src = "https://connect.facebook.net/en_US/sdk.js";
+	   fjs.parentNode.insertBefore(js, fjs);
+	 }(document, 'script', 'facebook-jssdk'));
+
+
+	 FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+
+{
+    status: 'connected',
+    authResponse; {
+        accessToken; '...',
+        expiresIn;'...',
+        signedRequest;'...',
+        userID;'...'
+    }
+}
+
+<fb:login-button 
+scope="public_profile,email"
+onlogin="checkLoginState();">
+</fb:login-button>
+
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+  </script>
+  
+
+
+
+	
 </body>
 </html>
